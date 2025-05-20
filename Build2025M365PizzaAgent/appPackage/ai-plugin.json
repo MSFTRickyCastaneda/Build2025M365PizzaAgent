@@ -1,0 +1,165 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/copilot/plugin/v2.1/schema.json",
+    "schema_version": "v2.1",
+    "name_for_human": "Pizza API",
+    "description_for_human": "API for managing pizza orders and related operations",
+    "description_for_model": "API for managing pizza orders and related operations",
+    "contact_email": "publisher-email@example.com",
+    "namespace": "build2025m365pizzaagent",
+    "capabilities": {
+        "conversation_starters": [
+            {
+                "text": "Get all orders"
+            },
+            {
+                "text": "Create a new order"
+            },
+            {
+                "text": "Get order by ID"
+            },
+            {
+                "text": "Cancel an order"
+            },
+            {
+                "text": "Get all pizzas"
+            },
+            {
+                "text": "Get pizza by ID"
+            },
+            {
+                "text": "Get all toppings"
+            },
+            {
+                "text": "Get all topping categories"
+            },
+            {
+                "text": "Get topping by ID"
+            }
+        ]
+    },
+    "functions": [
+        {
+            "name": "cancelOrder",
+            "description": "Cancels an order if it has not yet been started (status must be &apos;pending&apos;)",
+            "capabilities": {
+                "response_semantics": {
+                    "data_path": "$",
+                    "static_template": {
+                        "file": "./adaptiveCards/cancelOrder.json"
+                    }
+                }
+            }
+        },
+        {
+            "name": "createOrder",
+            "description": "Places a new order with pizzas (requires userId).",
+            "capabilities": {}
+        },
+        {
+            "name": "getOrderById",
+            "description": "Retrieves an order by its ID",
+            "capabilities": {
+                "response_semantics": {
+                    "data_path": "$",
+                    "static_template": {
+                        "file": "./adaptiveCards/getOrderById.json"
+                    }
+                }
+            }
+        },
+        {
+            "name": "getOrders",
+            "description": "Returns a list of all orders in the system",
+            "capabilities": {
+                "response_semantics": {
+                    "data_path": "$",
+                    "static_template": {
+                        "file": "./adaptiveCards/getOrders.json"
+                    }
+                }
+            }
+        },
+        {
+            "name": "getPizzaById",
+            "description": "Retrieves a specific pizza by its ID",
+            "capabilities": {
+                "response_semantics": {
+                    "data_path": "$",
+                    "static_template": {
+                        "file": "./adaptiveCards/getPizzaById.json"
+                    }
+                }
+            }
+        },
+        {
+            "name": "getPizzas",
+            "description": "Returns a list of all pizzas",
+            "capabilities": {
+                "response_semantics": {
+                    "data_path": "$",
+                    "static_template": {
+                        "file": "./adaptiveCards/getPizzas.json"
+                    }
+                }
+            }
+        },
+        {
+            "name": "getToppingById",
+            "description": "Retrieves a specific topping by its ID",
+            "capabilities": {
+                "response_semantics": {
+                    "data_path": "$",
+                    "static_template": {
+                        "file": "./adaptiveCards/getToppingById.json"
+                    }
+                }
+            }
+        },
+        {
+            "name": "getToppingCategories",
+            "description": "Returns a list of all topping categories",
+            "capabilities": {
+                "response_semantics": {
+                    "data_path": "$",
+                    "static_template": {
+                        "file": "./adaptiveCards/getToppingCategories.json"
+                    }
+                }
+            }
+        },
+        {
+            "name": "getToppings",
+            "description": "Returns a list of all toppings",
+            "capabilities": {
+                "response_semantics": {
+                    "data_path": "$",
+                    "static_template": {
+                        "file": "./adaptiveCards/getToppings.json"
+                    }
+                }
+            }
+        }
+    ],
+    "runtimes": [
+        {
+            "type": "OpenApi",
+            "auth": {
+                "type": "None"
+            },
+            "spec": {
+                "url": "apiSpecificationFile/openapi.yaml"
+            },
+            "run_for_functions": [
+                "getOrders",
+                "createOrder",
+                "getOrderById",
+                "cancelOrder",
+                "getPizzas",
+                "getPizzaById",
+                "getToppings",
+                "getToppingCategories",
+                "getToppingById"
+            ]
+        }
+    ]
+}
